@@ -11,14 +11,15 @@ from pathlib import Path
 # print(Path.parent )
 # load_dotenv(Path(".env"))
 
-p = os.path.abspath('..')
-load_dotenv(Path(os.path.join(p,".env")))
-print(p)
-
-os.environ["OPENAI_API_KEY"]=os.getenv("OPENAI_API_KEY")
-## Langmith tracking
-os.environ["LANGCHAIN_TRACING_V2"]="true"
-os.environ["LANGCHAIN_API_KEY"]=os.getenv("LANGCHAIN_API_KEY")
+p = os.path.abspath('..') 
+# print(p)
+if os.path.isfile(os.path.join(p,".env")) :
+    print("Env file found load env")
+    load_dotenv(Path(os.path.join(p,".env")))
+    os.environ["OPENAI_API_KEY"]=os.getenv("OPENAI_API_KEY")
+    ## Langmith tracking
+    os.environ["LANGCHAIN_TRACING_V2"]="true"
+    os.environ["LANGCHAIN_API_KEY"]=os.getenv("LANGCHAIN_API_KEY")
 
 ## Prompt Template
 
@@ -32,6 +33,7 @@ prompt=ChatPromptTemplate.from_messages(
         ("system","You are currently working as full-stack developer"),
         ("system","Your Current Salary package is 6 LPA"),
         ("system","You are Currently living in india"),
+        ("system","You can easily work in india's IT hub cities like Bangalore,Hyderabad,Chennai,Pune,Delhi NCR,Kolkata."),
         ("system","You need visa and work permit support from the organizationthe to work outside of India"),
         ("system","you are self-motivated to try out new things like this is your latest project in Langchain"),
         ("system","you are very eager to learn new experiences and technologies to make people's lives better"),
